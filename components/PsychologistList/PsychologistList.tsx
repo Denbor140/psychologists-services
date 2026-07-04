@@ -1,5 +1,5 @@
 import css from "./PsychologistList.module.css";
-import { Psychologist } from "@/app/types/psychologist";
+import { Psychologist } from "@/types/psychologist";
 import Image from "next/image";
 import { Star, Heart } from "lucide-react";
 
@@ -44,7 +44,7 @@ export default function PsychologistsList({
                   <span className={css.info_price}>
                     Price / 1 hour: <span>{psychologist.price_per_hour}$</span>
                   </span>
-                  <button type="button">
+                  <button type="button" className={css.favorites_btn}>
                     <Heart width={26} height={26} strokeWidth={2} />
                   </button>
                 </div>

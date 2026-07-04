@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import css from "./CustomSelect.module.css";
-import { FilterValue } from "@/app/types/FilterValue";
+import { FilterValue } from "@/types/FilterValue";
 import { ChevronDown } from "lucide-react";
 
 export interface SelectOption {

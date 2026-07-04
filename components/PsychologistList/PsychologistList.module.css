@@ -91,6 +91,14 @@
   color: #38cd3e;
 }
 
+.favorites_btn > svg {
+  transition: stroke 250ms ease-in-out;
+}
+
+.favorites_btn > svg:hover {
+  stroke: #54be96;
+}
+
 .info_medium_list {
   display: flex;
   flex-wrap: wrap;

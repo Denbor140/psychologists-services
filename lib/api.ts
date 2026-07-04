@@ -1,6 +1,6 @@
 import { get, ref } from "firebase/database";
 import { db } from "@/lib/firebase";
-import { Psychologist } from "@/app/types/psychologist";
+import { Psychologist } from "@/types/psychologist";
 
 export async function getAllPsychologists(): Promise<Psychologist[]> {
   const snapshot = await get(ref(db, "psychologists"));
