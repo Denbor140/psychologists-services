@@ -1,6 +1,7 @@
-import { get, ref } from "firebase/database";
+import { get, ref, remove, set } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { Psychologist } from "@/types/psychologist";
+import { firebaseKey } from "@/utils/firebaseKey";
 
 export async function getAllPsychologists(): Promise<Psychologist[]> {
   const snapshot = await get(ref(db, "psychologists"));
@@ -10,4 +11,28 @@ export async function getAllPsychologists(): Promise<Psychologist[]> {
   }
 
   return snapshot.val();
+}
+
+export async function addToFavorites(uid: string, psychologistName: string) {
+  const key = firebaseKey(psychologistName);
+
+  await set(ref(db, `favorites/${uid}/${key}`), true);
+}
+
+export async function removeFromFavorites(
+  uid: string,
+  psychologistName: string,
+) {
+  const key = firebaseKey(psychologistName);
+  await remove(ref(db, `favorites/${uid}/${key}`));
+}
+
+export async function checkFavorite(
+  uid: string,
+  psychologistName: string,
+): Promise<boolean> {
+  const key = firebaseKey(psychologistName);
+  const snapshot = await get(ref(db, `favorites/${uid}/${key}`));
+
+  return snapshot.exists();
 }

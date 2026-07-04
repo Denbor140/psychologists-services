@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useModal } from "../ModalProvider/ModalProvider";
+import { useRouter } from "next/navigation";
 
 const loginSchema = yup.object({
   email: yup.string().email("Incorrect email").required("Email is required"),
@@ -26,6 +28,8 @@ interface LoginFormProps {
 export default function LoginForm({ onSuccess, onClose }: LoginFormProps) {
   const { login } = useAuth();
   const [error, setError] = useState("");
+  const { redirectPath, closeAuthModal } = useModal();
+  const router = useRouter();
 
   const {
     register,
@@ -37,6 +41,10 @@ export default function LoginForm({ onSuccess, onClose }: LoginFormProps) {
     setError("");
     try {
       await login(data.email, data.password);
+      closeAuthModal();
+      if (redirectPath) {
+        router.push(redirectPath);
+      }
       onSuccess?.();
     } catch (err) {
       const code = (err as { code?: string }).code;

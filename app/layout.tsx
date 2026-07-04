@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import { AuthProvider } from "@/components/AuthProvider/AuthProvider";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { ModalProvider } from "@/components/ModalProvider/ModalProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,8 +27,10 @@ export default function RootLayout({
       <body>
         <TanStackProvider>
           <AuthProvider>
-            <Header />
-            <main>{children}</main>
+            <ModalProvider>
+              <Header />
+              <main>{children}</main>
+            </ModalProvider>
           </AuthProvider>
         </TanStackProvider>
       </body>

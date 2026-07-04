@@ -1,0 +1,17 @@
+.heart {
+  width: 26;
+  height: 26;
+  stroke-width: 2px;
+  stroke: #191a15;
+  transition: all 250ms ease-in-out;
+}
+
+.heart:hover {
+  stroke: #54be96;
+}
+
+.is_active {
+  fill: #54be96;
+  stroke-width: 2px;
+  stroke: #54be96;
+}

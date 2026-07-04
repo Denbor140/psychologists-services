@@ -1,7 +1,8 @@
 import css from "./PsychologistList.module.css";
 import { Psychologist } from "@/types/psychologist";
 import Image from "next/image";
-import { Star, Heart } from "lucide-react";
+import { Star } from "lucide-react";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 interface PsychologistsListProps {
   psychologists: Psychologist[];
@@ -13,8 +14,8 @@ export default function PsychologistsList({
   return (
     <section className={css.psychologist_section_container}>
       <ul className={css.list_container}>
-        {psychologists.map((psychologist) => (
-          <li key={psychologist.name} className={css.list_item}>
+        {psychologists.map((psychologist, index) => (
+          <li key={index} className={css.list_item}>
             <div className={css.item_img_container}>
               <Image
                 src={psychologist.avatar_url}
@@ -44,9 +45,7 @@ export default function PsychologistsList({
                   <span className={css.info_price}>
                     Price / 1 hour: <span>{psychologist.price_per_hour}$</span>
                   </span>
-                  <button type="button" className={css.favorites_btn}>
-                    <Heart width={26} height={26} strokeWidth={2} />
-                  </button>
+                  <FavoriteButton psychologistName={psychologist.name} />
                 </div>
               </div>
 
