@@ -1,3 +1,7 @@
+.psychologist_section_container {
+  margin-bottom: 64px;
+}
+
 .list_container {
   display: flex;
   flex-direction: column;
@@ -93,6 +97,7 @@
   row-gap: 8px;
   column-gap: 4px;
   margin-bottom: 24px;
+  max-width: 864px;
 }
 
 .info_medium_list_item {

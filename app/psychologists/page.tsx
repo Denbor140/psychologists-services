@@ -1,38 +1,48 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import { ref, get } from "firebase/database";
-import { db } from "@/lib/firebase";
-import type { Psychologist } from "../types/psychologist";
+import css from "./page.module.css";
+import { useState } from "react";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import PsychologistsList from "@/components/PsychologistList/PsychologistList";
+import { getAllPsychologists } from "@/lib/api";
+import Filters from "@/components/Filters/Filters";
+
+const PAGE_SIZE = 3;
 
 export default function PsychologistsPage() {
-  const [psychologists, setPsychologists] = useState<Psychologist[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState(PAGE_SIZE);
 
-  useEffect(() => {
-    async function fetchPsychologists() {
-      try {
-        const snapshot = await get(ref(db, "psychologists"));
+  const {
+    data: psychologists = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["psychologists"],
+    queryFn: getAllPsychologists,
+    refetchOnMount: false,
+    retry: false,
+    refetchOnWindowFocus: false,
+    placeholderData: keepPreviousData,
+  });
 
-        if (snapshot.exists()) {
-          setPsychologists(snapshot.val());
-        } else {
-          setPsychologists([]);
-        }
-      } catch (error) {
-        console.error("Failed to fetch psychologists:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Something went wrong</p>;
+  const visiblePsychologists = psychologists.slice(0, count);
 
-    fetchPsychologists();
-  }, []);
-
-  if (loading) return <p>Завантаження...</p>;
-
-  if (psychologists.length === 0) return <p>Психологів поки немає.</p>;
-
-  return <PsychologistsList psychologists={psychologists} />;
+  return (
+    <div className={css.psychologists_page_container}>
+      <div className="container">
+        <Filters />
+        <PsychologistsList psychologists={visiblePsychologists} />
+        {count < psychologists.length && (
+          <button
+            type="button"
+            className={css.load_more_btn}
+            onClick={() => setCount((prev) => prev + PAGE_SIZE)}
+          >
+            Load More
+          </button>
+        )}
+      </div>
+    </div>
+  );
 }

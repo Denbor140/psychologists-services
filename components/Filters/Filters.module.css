@@ -1,0 +1,12 @@
+.filter_section_container {
+  max-width: 226px;
+  margin-bottom: 32px;
+}
+
+.filter_title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.29;
+  color: #8a8a89;
+  margin-bottom: 8px;
+}
