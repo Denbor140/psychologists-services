@@ -1,4 +1,4 @@
-import { get, ref, remove, set } from "firebase/database";
+import { get, ref, set, remove } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { Psychologist } from "@/types/psychologist";
 import { firebaseKey } from "@/utils/firebaseKey";
