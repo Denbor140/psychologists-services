@@ -1,0 +1,45 @@
+.user_bar_container {
+  margin-left: auto;
+  display: flex;
+  gap: 28px;
+}
+
+.user_info_container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user_img_container {
+  border-radius: 10px;
+  background-color: #54be96;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_img {
+  fill: #fbfbfb;
+  stroke: none;
+}
+
+.user_name {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.log_out_btn {
+  border: 1px solid rgba(25, 26, 21, 0.2);
+  border-radius: 30px;
+  width: 135px;
+  height: 48px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: background-color 250ms ease-in-out;
+}
+
+.log_out_btn:hover {
+  background-color: rgba(84, 190, 150, 0.2);
+}

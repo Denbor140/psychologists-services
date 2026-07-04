@@ -10,7 +10,7 @@ export default function NavItem() {
   const { currentUser } = useAuth();
   const { openAuthModal } = useModal();
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!currentUser) {
       e.preventDefault();
       openAuthModal("login", "/favorites");

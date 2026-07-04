@@ -1,6 +1,6 @@
 "use client";
 import css from "./page.module.css";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPsychologists } from "@/lib/api";
 import { filterPsychologists } from "@/utils/filteredPsychologists";
@@ -20,6 +20,13 @@ export default function PsychologistsClientPage() {
     queryFn: getAllPsychologists,
     refetchOnWindowFocus: false,
   });
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "#f3f3f3";
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
+  }, []);
 
   const filteredPsychologists = useMemo(
     () => filterPsychologists(data ?? [], filter),

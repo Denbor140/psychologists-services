@@ -27,3 +27,15 @@
 .logo > span:last-child {
   font-weight: 600;
 }
+
+.auth_slot {
+  margin-left: auto;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.auth_placeholder {
+  width: 306px;
+  height: 48px;
+}
