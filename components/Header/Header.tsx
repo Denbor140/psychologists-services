@@ -1,3 +1,4 @@
+import AuthButtons from "../AuthButtons/AuthButtons";
 import NavItem from "../NavItem/NavItem";
 import css from "./Header.module.css";
 import Link from "next/link";
@@ -15,10 +16,7 @@ export default function Header() {
 
           <NavItem />
 
-          <div className={css.header_btn_container}>
-            <button className={css.btn_log_in}>Log In</button>
-            <button className={css.btn_register}>Registration</button>
-          </div>
+          <AuthButtons />
         </div>
       </div>
     </header>

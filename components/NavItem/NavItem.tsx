@@ -16,7 +16,7 @@ export default function NavItem() {
       </Link>
 
       <Link
-        href={"/"}
+        href={"/psychologists"}
         className={`${css.nav_link} ${pathname === "/psychologists" ? css.nav_link_active : ""}`}
       >
         Psychologists

@@ -27,38 +27,3 @@
 .logo > span:last-child {
   font-weight: 600;
 }
-
-.header_btn_container {
-  margin-left: auto;
-  display: flex;
-  gap: 8px;
-}
-
-.btn_log_in,
-.btn_register {
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  border-radius: 30px;
-  transition: background-color 250ms ease-in-out;
-}
-
-.btn_log_in {
-  border: 1px solid rgba(25, 26, 21, 0.2);
-  width: 124px;
-  height: 48px;
-}
-
-.btn_register {
-  width: 171px;
-  height: 48px;
-  background-color: #54be96;
-  color: #fbfbfb;
-}
-
-.btn_log_in:hover {
-  background-color: rgba(84, 190, 150, 0.2);
-}
-
-.btn_register:hover {
-  background-color: #36a379;
-}
