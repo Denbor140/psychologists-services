@@ -36,3 +36,28 @@ export async function checkFavorite(
 
   return snapshot.exists();
 }
+
+export async function getFavoriteKeys(uid: string): Promise<string[]> {
+  const snapshot = await get(ref(db, `favorites/${uid}`));
+
+  if (!snapshot.exists()) return [];
+
+  return Object.keys(snapshot.val());
+}
+
+export async function getFavoritePsychologists(
+  uid: string,
+): Promise<Psychologist[]> {
+  const [favoriteKeys, allPsychologists] = await Promise.all([
+    getFavoriteKeys(uid),
+    getAllPsychologists(),
+  ]);
+
+  if (favoriteKeys.length === 0) return [];
+
+  const favoriteKeySet = new Set(favoriteKeys);
+
+  return allPsychologists.filter((psychologist) =>
+    favoriteKeySet.has(firebaseKey(psychologist.name)),
+  );
+}

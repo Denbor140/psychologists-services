@@ -5,13 +5,16 @@ import { Heart } from "lucide-react";
 import { useModal } from "../ModalProvider/ModalProvider";
 import { addToFavorites, checkFavorite, removeFromFavorites } from "@/lib/api";
 import { useEffect, useState } from "react";
+import { Psychologist } from "@/types/psychologist";
 
 interface FavoriteButtonProps {
-  psychologistName: string;
+  psychologist: Psychologist;
+  onToggleFavorite?: (psychologist: Psychologist) => void;
 }
 
 export default function FavoriteButton({
-  psychologistName,
+  psychologist,
+  onToggleFavorite,
 }: FavoriteButtonProps) {
   const { currentUser } = useAuth();
   const { openAuthModal } = useModal();
@@ -23,13 +26,12 @@ export default function FavoriteButton({
     const uid = currentUser.uid;
 
     async function loadFavorite() {
-      const favorite = await checkFavorite(uid, psychologistName);
-
+      const favorite = await checkFavorite(uid, psychologist.name);
       setIsFavorite(favorite);
     }
 
     loadFavorite();
-  }, [currentUser, psychologistName]);
+  }, [currentUser, psychologist.name]);
 
   const handleClick = async () => {
     if (!currentUser) {
@@ -38,9 +40,12 @@ export default function FavoriteButton({
     }
 
     if (isFavorite) {
-      await removeFromFavorites(currentUser.uid, psychologistName);
+      await removeFromFavorites(currentUser.uid, psychologist.name);
+      setIsFavorite(false);
+      onToggleFavorite?.(psychologist);
     } else {
-      await addToFavorites(currentUser.uid, psychologistName);
+      await addToFavorites(currentUser.uid, psychologist.name);
+      setIsFavorite(true);
     }
 
     setIsFavorite(!isFavorite);

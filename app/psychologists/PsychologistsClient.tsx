@@ -1,6 +1,6 @@
 "use client";
 import css from "./page.module.css";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPsychologists } from "@/lib/api";
 import { filterPsychologists } from "@/utils/filteredPsychologists";
@@ -15,22 +15,19 @@ export default function PsychologistsClientPage() {
   const [filter, setFilter] = useState<FilterValue>("a-z");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const { data, isFetching, error } = useQuery({
+  const {
+    data: psychologists = [],
+    isFetching,
+    error,
+  } = useQuery({
     queryKey: ["psychologists"],
     queryFn: getAllPsychologists,
     refetchOnWindowFocus: false,
   });
 
-  useEffect(() => {
-    document.body.style.backgroundColor = "#f3f3f3";
-    return () => {
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-
   const filteredPsychologists = useMemo(
-    () => filterPsychologists(data ?? [], filter),
-    [data, filter],
+    () => filterPsychologists(psychologists ?? [], filter),
+    [psychologists, filter],
   );
 
   const visiblePsychologists = filteredPsychologists.slice(0, visibleCount);

@@ -1,0 +1,21 @@
+.favorites_page_container {
+  padding-top: 64px;
+  padding-bottom: 100px;
+}
+
+.load_more_btn {
+  display: block;
+  margin: 0 auto;
+  border-radius: 30px;
+  background-color: #54be96;
+  width: 176px;
+  height: 48px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  transition: background-color 250ms ease-in-out;
+}
+
+.load_more_btn:hover {
+  background-color: #36a379;
+}

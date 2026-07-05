@@ -4,11 +4,22 @@ import css from "./NavItem.module.css";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider/AuthProvider";
 import { useModal } from "@/components/ModalProvider/ModalProvider";
+import { useEffect } from "react";
 
 export default function NavItem() {
   const pathname = usePathname();
   const { currentUser } = useAuth();
   const { openAuthModal } = useModal();
+
+  useEffect(() => {
+    if (pathname === "/psychologists" || pathname === "/favorites") {
+      document.body.style.background = "#f3f3f3";
+    }
+
+    return () => {
+      document.body.style.background = "";
+    };
+  }, [pathname]);
 
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!currentUser) {

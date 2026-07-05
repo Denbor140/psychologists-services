@@ -6,10 +6,13 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 interface PsychologistsListProps {
   psychologists: Psychologist[];
+  onToggleFavorite?: (psychologist: Psychologist) => void;
+  initialIsFavorite?: boolean;
 }
 
 export default function PsychologistsList({
   psychologists,
+  onToggleFavorite,
 }: PsychologistsListProps) {
   return (
     <section className={css.psychologist_section_container}>
@@ -45,7 +48,10 @@ export default function PsychologistsList({
                   <span className={css.info_price}>
                     Price / 1 hour: <span>{psychologist.price_per_hour}$</span>
                   </span>
-                  <FavoriteButton psychologistName={psychologist.name} />
+                  <FavoriteButton
+                    psychologist={psychologist}
+                    onToggleFavorite={onToggleFavorite}
+                  />
                 </div>
               </div>
 
