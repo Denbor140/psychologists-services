@@ -1,23 +1,62 @@
-import {
-  QueryClient,
-  HydrationBoundary,
-  dehydrate,
-} from "@tanstack/react-query";
-
-import PsychologistsClientPage from "./PsychologistsClient";
+"use client";
+import css from "./page.module.css";
+import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getAllPsychologists } from "@/lib/api";
+import { filterPsychologists } from "@/utils/filteredPsychologists";
+import { FilterValue } from "@/types/FilterValue";
+import Filters from "@/components/Filters/Filters";
+import PsychologistsList from "@/components/PsychologistList/PsychologistList";
+import Loader from "@/components/Loader/Loader";
 
-export default async function PsychologistsPage() {
-  const queryClient = new QueryClient();
+const PAGE_SIZE = 3;
 
-  await queryClient.prefetchQuery({
+export default function PsychologistsPage() {
+  const [filter, setFilter] = useState<FilterValue>("a-z");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  const {
+    data: psychologists = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["psychologists"],
     queryFn: getAllPsychologists,
+    refetchOnWindowFocus: false,
   });
 
+  const filteredPsychologists = useMemo(
+    () => filterPsychologists(psychologists ?? [], filter),
+    [psychologists, filter],
+  );
+
+  const visiblePsychologists = filteredPsychologists.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPsychologists.length;
+
+  const handleFilterChange = (value: FilterValue) => {
+    setFilter(value);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  if (isLoading) return <Loader />;
+
+  if (error) return <p>Something went wrong</p>;
+
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <PsychologistsClientPage />
-    </HydrationBoundary>
+    <div className={css.psychologists_page_container}>
+      <div className="container">
+        <Filters value={filter} onChange={handleFilterChange} />
+        <PsychologistsList psychologists={visiblePsychologists} />
+        {hasMore && (
+          <button
+            type="button"
+            className={css.load_more_btn}
+            onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+          >
+            Load More
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

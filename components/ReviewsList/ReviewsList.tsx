@@ -1,0 +1,42 @@
+import { Psychologist } from "@/types/psychologist";
+import css from "./ReviewsList.module.css";
+import { Star } from "lucide-react";
+
+interface ReviewsListProps {
+  psychologist: Psychologist;
+}
+
+export default function ReviewsList({ psychologist }: ReviewsListProps) {
+  return (
+    <div>
+      <ul className={css.reviews_list}>
+        {psychologist.reviews.map((r, index) => (
+          <li key={index} className={css.reviews_list_item}>
+            <div className={css.reviewer_info_container}>
+              <div className={css.reviewer_img_container}>
+                <span>{r.reviewer.charAt(0).toUpperCase()}</span>
+              </div>
+              <div className={css.reviewer_info}>
+                <span className={css.reviewer_name}>{r.reviewer}</span>
+                <div className={css.reviews_rating_container}>
+                  <Star
+                    width={16}
+                    height={16}
+                    fill="#ffc531"
+                    stroke="#ffc531"
+                    strokeWidth={1.2}
+                  />
+                  <span className={css.reviews_rating}>{r.rating}</span>
+                </div>
+              </div>
+            </div>
+            <p className={css.reviewer_comment}>{r.comment}</p>
+          </li>
+        ))}
+      </ul>
+      <button type="button" className={css.reviews_btn}>
+        Make an appointment
+      </button>
+    </div>
+  );
+}
