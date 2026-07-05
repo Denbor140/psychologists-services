@@ -15,9 +15,7 @@
   background-color: #fbfbfb;
   padding: 64px;
   border-radius: 30px;
-  /* max-width: 565px; */
-  max-width: 600px;
-  width: 100%;
+  max-width: 565px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }

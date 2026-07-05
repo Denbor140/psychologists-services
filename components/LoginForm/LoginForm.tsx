@@ -6,16 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../AuthProvider/AuthProvider";
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 import { useModal } from "../ModalProvider/ModalProvider";
 import { useRouter } from "next/navigation";
 
 const loginSchema = yup.object({
   email: yup.string().email("Incorrect email").required("Email is required"),
-  password: yup
-    .string()
-    .min(6, "Minimum 6 characters")
-    .required("Password is required"),
+  password: yup.string().required("Password is required"),
 });
 
 type FormData = yup.InferType<typeof loginSchema>;
@@ -29,6 +26,7 @@ export default function LoginForm({ onSuccess, onClose }: LoginFormProps) {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const { redirectPath, closeModal } = useModal();
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const {
@@ -79,11 +77,23 @@ export default function LoginForm({ onSuccess, onClose }: LoginFormProps) {
 
         <div className={css.form_pass_container}>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             className={css.form_input}
             {...register("password")}
           />
+          <button
+            type="button"
+            className={css.password_toggle_btn}
+            onClick={() => setShowPassword((prev) => !prev)}
+            tabIndex={-1}
+          >
+            {showPassword ? (
+              <EyeOff width={20} height={20} strokeWidth={2} />
+            ) : (
+              <Eye width={20} height={20} strokeWidth={2} />
+            )}
+          </button>
           {errors.password && (
             <p style={{ color: "red", position: "absolute" }}>
               {errors.password.message}

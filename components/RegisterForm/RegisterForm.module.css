@@ -30,6 +30,13 @@
   position: relative;
 }
 
+.password_toggle_btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+}
+
 .form_name_container,
 .form_email_container {
   margin-bottom: 16px;

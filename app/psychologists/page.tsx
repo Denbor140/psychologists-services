@@ -46,7 +46,13 @@ export default function PsychologistsPage() {
     <div className={css.psychologists_page_container}>
       <div className="container">
         <Filters value={filter} onChange={handleFilterChange} />
-        <PsychologistsList psychologists={visiblePsychologists} />
+        {filteredPsychologists.length === 0 ? (
+          <div className={css.none_psychologists_container}>
+            <span>No psychologists matching.</span>
+          </div>
+        ) : (
+          <PsychologistsList psychologists={visiblePsychologists} />
+        )}
         {hasMore && (
           <button
             type="button"

@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Psychologists Services",
-  description: "Psychologists Services",
+  description: "Create by GO IT - Denys Boreiko",
 };
 
 export default function RootLayout({

@@ -53,23 +53,29 @@ export default function FavoritesPage() {
   };
 
   const isLoading = authLoading || (!!currentUser && favoritesLoading);
+  const hasFavorites = favorites.length > 0;
 
   if (isLoading) return <Loader />;
 
   if (error) return <p>Something went wrong</p>;
 
-  if (favorites.length === 0) {
-    return <p>You don`t have any favorite psychologists yet.</p>;
-  }
-
   return (
     <div className={css.favorites_page_container}>
       <div className="container">
-        <Filters value={filter} onChange={handleFilterChange} />
-        <PsychologistsList
-          psychologists={visiblePsychologists}
-          onToggleFavorite={handleRemoveFavorite}
-        />
+        {!hasFavorites ? (
+          <div className={css.none_favorites_container}>
+            <span>You don`t have any favorite psychologists yet.</span>
+          </div>
+        ) : (
+          <Filters value={filter} onChange={handleFilterChange} />
+        )}
+
+        {hasFavorites && (
+          <PsychologistsList
+            psychologists={visiblePsychologists}
+            onToggleFavorite={handleRemoveFavorite}
+          />
+        )}
         {hasMore && (
           <button
             type="button"

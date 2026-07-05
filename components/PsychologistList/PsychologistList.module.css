@@ -135,3 +135,18 @@
   text-decoration: underline;
   text-decoration-skip-ink: none;
 }
+
+.reviews_wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.reviews_wrapper_open {
+  grid-template-rows: 1fr;
+}
+
+.reviews_inner {
+  overflow: hidden;
+  min-height: 0;
+}

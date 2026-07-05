@@ -2,18 +2,28 @@
 
 import css from "./MakeAppointmentForm.module.css";
 import { Psychologist } from "@/types/psychologist";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { X } from "lucide-react";
 import { useModal } from "../ModalProvider/ModalProvider";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import CustomSelectTime, {
+  SelectOption,
+} from "../CustomSelectTime/CustomSelectTime";
+import { TimeValue } from "@/types/TimeValue";
+import { TIME_VALUES } from "@/constants/timeValues";
 
 interface MakeAppointmentFormProps {
   psychologist?: Psychologist;
   onClose: () => void;
 }
+
+const timeOptions: SelectOption[] = TIME_VALUES.map((time) => ({
+  label: time,
+  value: time,
+}));
 
 const MakeAppointmentFormSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -22,7 +32,7 @@ const MakeAppointmentFormSchema = yup.object({
   email: yup.string().email().required("Email is required"),
   comment: yup
     .string()
-    .max(500, "Minimum 500 characters")
+    .max(500, "Maximum 500 characters")
     .required("Comment is required"),
 });
 
@@ -36,6 +46,7 @@ export default function MakeAppointmentForm({
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: yupResolver(MakeAppointmentFormSchema) });
@@ -47,7 +58,7 @@ export default function MakeAppointmentForm({
     closeModal();
   };
   return (
-    <div>
+    <>
       <button type="button" className={css.btn_close} onClick={onClose}>
         <X width={32} height={32} strokeWidth={2.5} />
       </button>
@@ -57,7 +68,6 @@ export default function MakeAppointmentForm({
         short form below to book your personal appointment with a professional
         psychologist. We guarantee confidentiality and respect for your privacy.
       </p>
-
       <div className={css.psychologist_info_container}>
         {psychologist && (
           <>
@@ -91,7 +101,7 @@ export default function MakeAppointmentForm({
           )}
         </div>
         <div className={css.time_phone_container}>
-          <div className={css.form_phone_container}>
+          <div>
             <input
               type="text"
               placeholder="+380"
@@ -104,12 +114,20 @@ export default function MakeAppointmentForm({
               </p>
             )}
           </div>
-          <div className={css.form_time_container}>
-            <input
-              type="text"
-              placeholder="00:00"
-              className={css.time_input}
-              {...register("time")}
+
+          <div>
+            <Controller
+              name="time"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <CustomSelectTime
+                  options={timeOptions}
+                  value={field.value as TimeValue | ""}
+                  placeholder="00:00"
+                  onChange={field.onChange}
+                />
+              )}
             />
             {errors.time && (
               <p style={{ color: "red", position: "absolute" }}>
@@ -148,6 +166,6 @@ export default function MakeAppointmentForm({
           {isSubmitting ? "Sending..." : "Send"}
         </button>
       </form>
-    </div>
+    </>
   );
 }

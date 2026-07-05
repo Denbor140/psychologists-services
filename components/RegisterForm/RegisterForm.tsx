@@ -6,7 +6,7 @@ import { useAuth } from "../AuthProvider/AuthProvider";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 
 interface RegisterFormProps {
   onSuccess?: () => void;
@@ -33,6 +33,7 @@ export default function RegisterForm({
 }: RegisterFormProps) {
   const { register: registerUser } = useAuth();
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -98,11 +99,23 @@ export default function RegisterForm({
         </div>
         <div className={css.form_pass_container}>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             {...register("password")}
             className={css.form_input}
           />
+          <button
+            type="button"
+            className={css.password_toggle_btn}
+            onClick={() => setShowPassword((prev) => !prev)}
+            tabIndex={-1}
+          >
+            {showPassword ? (
+              <EyeOff width={20} height={20} strokeWidth={2} />
+            ) : (
+              <Eye width={20} height={20} strokeWidth={2} />
+            )}
+          </button>
           {errors.password && (
             <p style={{ color: "red", position: "absolute" }}>
               {errors.password.message}

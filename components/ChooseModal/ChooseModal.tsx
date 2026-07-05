@@ -23,7 +23,10 @@ export default function ChooseModal({
   const [mode, setMode] = useState<ModalMode>(initialMode);
 
   return (
-    <Modal onClose={onClose}>
+    <Modal
+      onClose={onClose}
+      maxWidth={mode === "appointment" ? 600 : undefined}
+    >
       {mode === "login" && <LoginForm onSuccess={onClose} onClose={onClose} />}
       {mode === "register" && (
         <RegisterForm onSuccess={onClose} onClose={onClose} />

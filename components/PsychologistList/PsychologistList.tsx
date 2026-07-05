@@ -108,7 +108,13 @@ export default function PsychologistsList({
                   {isReadMore ? "Hide" : "Read more"}
                 </button>
 
-                {isReadMore && <ReviewsList psychologist={psychologist} />}
+                <div
+                  className={`${css.reviews_wrapper} ${isReadMore ? css.reviews_wrapper_open : ""}`}
+                >
+                  <div className={css.reviews_inner}>
+                    <ReviewsList psychologist={psychologist} />
+                  </div>
+                </div>
               </div>
             </li>
           );

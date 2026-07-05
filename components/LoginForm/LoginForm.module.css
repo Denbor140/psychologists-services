@@ -25,6 +25,13 @@
   margin-bottom: 16px;
 }
 
+.password_toggle_btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+}
+
 .form_input {
   border: 1px solid rgba(25, 26, 21, 0.1);
   border-radius: 12px;
@@ -44,4 +51,20 @@
 
 .login_btn:hover {
   background-color: #36a379;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-textfield-decoration-container {
+  visibility: visible;
+}
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
 }

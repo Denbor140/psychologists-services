@@ -6,12 +6,13 @@ body {
   font-size: 16px;
   line-height: 1.25;
   color: #191a15;
-
+  min-height: 100vh;
   background: linear-gradient(
     115deg,
     rgba(251, 251, 251, 1) 40%,
     rgba(84, 190, 150, 1) 399%
   );
+  transition: all 250ms ease-in-out;
 }
 
 h1,

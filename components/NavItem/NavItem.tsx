@@ -24,7 +24,7 @@ export default function NavItem() {
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!currentUser) {
       e.preventDefault();
-      openModal("login", "/favorites");
+      openModal("login", { redirect: "/favorites" });
       return;
     }
   };
