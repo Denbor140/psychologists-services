@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import { AuthProvider } from "@/components/AuthProvider/AuthProvider";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { ModalProvider } from "@/components/ModalProvider/ModalProvider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,6 +29,12 @@ export default function RootLayout({
         <TanStackProvider>
           <AuthProvider>
             <ModalProvider>
+              <Toaster
+                position="top-right"
+                toastOptions={{
+                  duration: 5000,
+                }}
+              />
               <Header />
               <main>{children}</main>
             </ModalProvider>

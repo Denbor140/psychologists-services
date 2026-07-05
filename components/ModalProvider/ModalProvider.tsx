@@ -1,39 +1,54 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import AuthModal from "@/components/AuthModal/AuthModal";
+import ChooseModal from "@/components/ChooseModal/ChooseModal";
+import { Psychologist } from "@/types/psychologist";
 
-type AuthMode = "login" | "register";
+type ModalMode = "login" | "register" | "appointment";
 
 interface ModalContextType {
-  openAuthModal: (mode: AuthMode, redirect?: string) => void;
-  closeAuthModal: () => void;
+  openModal: (
+    mode: ModalMode,
+    options?: { redirect?: string; psychologist?: Psychologist },
+  ) => void;
+  closeModal: () => void;
   redirectPath: string | null;
 }
 
 const ModalContext = createContext<ModalContextType | null>(null);
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = useState<AuthMode | null>(null);
+  const [mode, setMode] = useState<ModalMode | null>(null);
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
+  const [selectedPsychologist, setSelectedPsychologist] =
+    useState<Psychologist | null>(null);
 
-  const openAuthModal = (mode: AuthMode, redirect?: string) => {
-    setRedirectPath(redirect ?? null);
+  const openModal = (
+    mode: ModalMode,
+    options?: { redirect?: string; psychologist?: Psychologist },
+  ) => {
+    setRedirectPath(options?.redirect ?? null);
+    setSelectedPsychologist(options?.psychologist ?? null);
     setMode(mode);
   };
 
-  const closeAuthModal = () => {
+  const closeModal = () => {
     setMode(null);
     setRedirectPath(null);
+    setSelectedPsychologist(null);
   };
 
   return (
-    <ModalContext.Provider
-      value={{ openAuthModal, closeAuthModal, redirectPath }}
-    >
+    <ModalContext.Provider value={{ openModal, closeModal, redirectPath }}>
       {children}
 
-      {mode && <AuthModal initialMode={mode} onClose={closeAuthModal} />}
+      {mode && (
+        <ChooseModal
+          initialMode={mode}
+          onClose={closeModal}
+          psychologist={selectedPsychologist ?? undefined}
+        />
+      )}
     </ModalContext.Provider>
   );
 }

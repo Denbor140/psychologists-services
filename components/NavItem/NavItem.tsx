@@ -9,7 +9,7 @@ import { useEffect } from "react";
 export default function NavItem() {
   const pathname = usePathname();
   const { currentUser } = useAuth();
-  const { openAuthModal } = useModal();
+  const { openModal } = useModal();
 
   useEffect(() => {
     if (pathname === "/psychologists" || pathname === "/favorites") {
@@ -24,7 +24,7 @@ export default function NavItem() {
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!currentUser) {
       e.preventDefault();
-      openAuthModal("login", "/favorites");
+      openModal("login", "/favorites");
       return;
     }
   };

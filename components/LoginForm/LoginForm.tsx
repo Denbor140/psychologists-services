@@ -28,7 +28,7 @@ interface LoginFormProps {
 export default function LoginForm({ onSuccess, onClose }: LoginFormProps) {
   const { login } = useAuth();
   const [error, setError] = useState("");
-  const { redirectPath, closeAuthModal } = useModal();
+  const { redirectPath, closeModal } = useModal();
   const router = useRouter();
 
   const {
@@ -41,7 +41,7 @@ export default function LoginForm({ onSuccess, onClose }: LoginFormProps) {
     setError("");
     try {
       await login(data.email, data.password);
-      closeAuthModal();
+      closeModal();
       if (redirectPath) {
         router.push(redirectPath);
       }

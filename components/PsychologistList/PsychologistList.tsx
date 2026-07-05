@@ -1,3 +1,5 @@
+"use client";
+
 import css from "./PsychologistList.module.css";
 import { Psychologist } from "@/types/psychologist";
 import Image from "next/image";

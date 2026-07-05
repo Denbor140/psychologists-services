@@ -1,12 +1,16 @@
+"use client";
+
 import { Psychologist } from "@/types/psychologist";
 import css from "./ReviewsList.module.css";
 import { Star } from "lucide-react";
+import { useModal } from "../ModalProvider/ModalProvider";
 
 interface ReviewsListProps {
   psychologist: Psychologist;
 }
 
 export default function ReviewsList({ psychologist }: ReviewsListProps) {
+  const { openModal } = useModal();
   return (
     <div>
       <ul className={css.reviews_list}>
@@ -34,7 +38,11 @@ export default function ReviewsList({ psychologist }: ReviewsListProps) {
           </li>
         ))}
       </ul>
-      <button type="button" className={css.reviews_btn}>
+      <button
+        type="button"
+        className={css.reviews_btn}
+        onClick={() => openModal("appointment", { psychologist })}
+      >
         Make an appointment
       </button>
     </div>

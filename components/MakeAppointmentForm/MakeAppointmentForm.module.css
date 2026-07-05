@@ -1,0 +1,112 @@
+.btn_close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  color: rgba(25, 26, 21, 0.5);
+  margin-bottom: 40px;
+}
+
+.psychologist_info_container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.psychologist_info_container > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.psychologist_img {
+  border-radius: 15px;
+}
+
+.psychologist_name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.psychologist_info_container > div > span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #8a8a89;
+}
+
+.form_name_container,
+.form_email_container,
+.time_phone_container {
+  margin-bottom: 16px;
+}
+
+.time_phone_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form_input {
+  border: 1px solid rgba(25, 26, 21, 0.1);
+  border-radius: 12px;
+  padding: 16px 0 16px 18px;
+  width: 100%;
+  height: 52px;
+  background-color: transparent;
+}
+
+.phone_input,
+.time_input {
+  border: 1px solid rgba(25, 26, 21, 0.1);
+  border-radius: 12px;
+  padding: 16px 0 16px 18px;
+  width: 232px;
+  height: 52px;
+  background-color: transparent;
+}
+
+.form_input::placeholder,
+.form_textarea::placeholder,
+.phone_input::placeholder,
+.time_input::placeholder {
+  color: inherit;
+}
+
+.form_comment_container {
+  margin-bottom: 40px;
+}
+
+.form_textarea {
+  border: 1px solid rgba(25, 26, 21, 0.1);
+  border-radius: 12px;
+  padding: 16px 0 16px 18px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.form_btn {
+  border-radius: 30px;
+  width: 472px;
+  height: 52px;
+  background-color: #54be96;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  transition: background-color 250ms ease-in-out;
+}
+
+.form_btn:hover {
+  background-color: #36a379;
+}

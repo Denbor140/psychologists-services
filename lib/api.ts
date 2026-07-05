@@ -4,13 +4,18 @@ import { Psychologist } from "@/types/psychologist";
 import { firebaseKey } from "@/utils/firebaseKey";
 
 export async function getAllPsychologists(): Promise<Psychologist[]> {
-  const snapshot = await get(ref(db, "psychologists"));
+  // const snapshot = await get(ref(db, "psychologists"));
 
-  if (!snapshot.exists()) {
-    return [];
-  }
+  // if (!snapshot.exists()) {
+  //   return [];
+  // }
 
-  return snapshot.val();
+  // return snapshot.val();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL}/psychologists.json`,
+  );
+  const data = await res.json();
+  return data ?? {};
 }
 
 export async function addToFavorites(uid: string, psychologistName: string) {

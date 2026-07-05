@@ -17,7 +17,7 @@ export default function FavoriteButton({
   onToggleFavorite,
 }: FavoriteButtonProps) {
   const { currentUser } = useAuth();
-  const { openAuthModal } = useModal();
+  const { openModal } = useModal();
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function FavoriteButton({
 
   const handleClick = async () => {
     if (!currentUser) {
-      openAuthModal("login");
+      openModal("login");
       return;
     }
 
