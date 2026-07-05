@@ -64,6 +64,38 @@
   position: relative;
 }
 
+.hero_image_container {
+  position: relative;
+}
+
+.users_img_container {
+  position: absolute;
+  top: 38px;
+  right: -38px;
+  width: 48px;
+  height: 48px;
+  background-color: #fbc75e;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(15deg);
+}
+
+.question_img_container {
+  position: absolute;
+  top: 201px;
+  left: -35px;
+  background-color: #4535af;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-15deg);
+}
+
 .hero_expienced_container {
   position: absolute;
   bottom: 75px;

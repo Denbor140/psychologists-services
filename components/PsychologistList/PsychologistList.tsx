@@ -1,7 +1,7 @@
 import css from "./PsychologistList.module.css";
 import { Psychologist } from "@/types/psychologist";
 import Image from "next/image";
-import { Star } from "lucide-react";
+import { Star, Circle } from "lucide-react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 interface PsychologistsListProps {
@@ -26,6 +26,14 @@ export default function PsychologistsList({
                 width={96}
                 height={96}
                 className={css.item_img}
+              />
+              <Circle
+                width={14}
+                height={14}
+                fill="#38cd3e"
+                stroke="#fbfbfb"
+                strokeWidth={4}
+                className={css.item_circle}
               />
             </div>
             <div>

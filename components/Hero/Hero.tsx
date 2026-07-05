@@ -2,7 +2,7 @@
 
 import css from "./Hero.module.css";
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { Check, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
@@ -32,13 +32,25 @@ export default function Hero() {
             </button>
           </div>
           <div className={css.hero_container_right}>
-            <Image
-              src={"/hero.png"}
-              width={464}
-              height={526}
-              alt="hero-image"
-              loading="eager"
-            />
+            <div className={css.hero_image_container}>
+              <Image
+                src={"/hero.png"}
+                width={464}
+                height={526}
+                alt="hero-image"
+                loading="eager"
+              />
+
+              <div className={css.users_img_container}>
+                <Users width={17} height={15} fill="#fbfbfb" stroke="#fbfbfb" />
+              </div>
+
+              <div className={css.question_img_container}>
+                <svg width={10} height={17} fill="#fbfbfb">
+                  <use href="/sprite.svg#icon-question"></use>
+                </svg>
+              </div>
+            </div>
 
             <div className={css.hero_expienced_container}>
               <div className={css.experienced_check_container}>
