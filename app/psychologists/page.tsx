@@ -1,42 +1,34 @@
 "use client";
 import css from "./page.module.css";
-import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getAllPsychologists } from "@/lib/api";
-import { filterPsychologists } from "@/utils/filteredPsychologists";
-import { FilterValue } from "@/types/FilterValue";
-import Filters from "@/components/Filters/Filters";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { Cursor, getAllPsychologists } from "@/lib/api";
 import PsychologistsList from "@/components/PsychologistList/PsychologistList";
 import Loader from "@/components/Loader/Loader";
-
-const PAGE_SIZE = 3;
+import { FilterValue } from "@/types/FilterValue";
+import { useState } from "react";
+import Filters from "@/components/Filters/Filters";
 
 export default function PsychologistsPage() {
   const [filter, setFilter] = useState<FilterValue>("a-z");
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const {
-    data: psychologists = [],
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: ["psychologists"],
-    queryFn: getAllPsychologists,
+  } = useInfiniteQuery({
+    queryKey: ["psychologists", filter],
+    queryFn: ({ pageParam }) => getAllPsychologists(filter, pageParam),
+    initialPageParam: null as Cursor,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasMore ? lastPage.lastCursor : undefined,
     refetchOnWindowFocus: false,
+    retry: false,
   });
 
-  const filteredPsychologists = useMemo(
-    () => filterPsychologists(psychologists ?? [], filter),
-    [psychologists, filter],
-  );
-
-  const visiblePsychologists = filteredPsychologists.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredPsychologists.length;
-
-  const handleFilterChange = (value: FilterValue) => {
-    setFilter(value);
-    setVisibleCount(PAGE_SIZE);
-  };
+  const psychologists = data?.pages.flatMap((page) => page.items) ?? [];
 
   if (isLoading) return <Loader />;
 
@@ -45,19 +37,22 @@ export default function PsychologistsPage() {
   return (
     <div className={css.psychologists_page_container}>
       <div className="container">
-        <Filters value={filter} onChange={handleFilterChange} />
-        {filteredPsychologists.length === 0 ? (
+        <Filters value={filter} onChange={setFilter} />
+
+        {psychologists.length === 0 ? (
           <div className={css.none_psychologists_container}>
             <span>No psychologists matching.</span>
           </div>
         ) : (
-          <PsychologistsList psychologists={visiblePsychologists} />
+          <PsychologistsList psychologists={psychologists} />
         )}
-        {hasMore && (
+
+        {hasNextPage && (
           <button
             type="button"
             className={css.load_more_btn}
-            onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
           >
             Load More
           </button>

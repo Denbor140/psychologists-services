@@ -6,3 +6,5 @@ export type FilterValue =
   | "popular"
   | "not-popular"
   | "show-all";
+
+export type SortField = "name" | "rating" | "price_per_hour";

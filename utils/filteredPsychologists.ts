@@ -8,9 +8,6 @@ export function filterPsychologists(
   const items = [...psychologists];
 
   switch (filter) {
-    case "a-z":
-      return items.sort((a, b) => a.name.localeCompare(b.name));
-
     case "z-a":
       return items.sort((a, b) => b.name.localeCompare(a.name));
 
@@ -26,7 +23,10 @@ export function filterPsychologists(
     case "not-popular":
       return items.sort((a, b) => a.rating - b.rating);
 
+    case "a-z":
     case "show-all":
+      return items.sort((a, b) => a.name.localeCompare(b.name));
+
     default:
       return items;
   }

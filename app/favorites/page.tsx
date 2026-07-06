@@ -3,7 +3,7 @@
 import css from "./page.module.css";
 import { useAuth } from "@/components/AuthProvider/AuthProvider";
 import PsychologistsList from "@/components/PsychologistList/PsychologistList";
-import { getFavoritePsychologists } from "@/lib/api";
+import { getFavoritePsychologists, removeFromFavorites } from "@/lib/api";
 import { useMemo, useState } from "react";
 import { Psychologist } from "@/types/psychologist";
 import Loader from "@/components/Loader/Loader";
@@ -32,9 +32,13 @@ export default function FavoritesPage() {
     refetchOnWindowFocus: false,
   });
 
-  function handleRemoveFavorite(psychologist: Psychologist) {
+  async function handleRemoveFavorite(psychologist: Psychologist) {
+    if (!currentUser) return;
+
+    await removeFromFavorites(currentUser.uid, psychologist.name);
+
     queryClient.setQueryData<Psychologist[]>(
-      ["favorites", currentUser?.uid],
+      ["favorites", currentUser.uid],
       (prev) => prev?.filter((p) => p.name !== psychologist.name) ?? [],
     );
   }
@@ -70,12 +74,17 @@ export default function FavoritesPage() {
           <Filters value={filter} onChange={handleFilterChange} />
         )}
 
-        {hasFavorites && (
+        {visiblePsychologists.length === 0 && hasFavorites ? (
+          <div className={css.none_favorites_match}>
+            <span>No psychologists matching.</span>
+          </div>
+        ) : (
           <PsychologistsList
             psychologists={visiblePsychologists}
             onToggleFavorite={handleRemoveFavorite}
           />
         )}
+
         {hasMore && (
           <button
             type="button"

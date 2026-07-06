@@ -20,7 +20,8 @@
   background-color: #36a379;
 }
 
-.none_favorites_container {
+.none_favorites_container,
+.none_favorites_match {
   background-color: #54be96;
   border-radius: 20px;
   max-width: 1024px;
@@ -30,7 +31,8 @@
   text-align: center;
 }
 
-.none_favorites_container > span {
+.none_favorites_container > span,
+.none_favorites_match > span {
   color: #fbfbfb;
   font-weight: 500;
   font-size: 20px;
