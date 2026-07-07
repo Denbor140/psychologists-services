@@ -6,6 +6,7 @@ import { useModal } from "../ModalProvider/ModalProvider";
 import { addToFavorites, checkFavorite, removeFromFavorites } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Psychologist } from "@/types/psychologist";
+import toast from "react-hot-toast";
 
 interface FavoriteButtonProps {
   psychologist: Psychologist;
@@ -43,9 +44,13 @@ export default function FavoriteButton({
       await removeFromFavorites(currentUser.uid, psychologist.name);
       setIsFavorite(false);
       onToggleFavorite?.(psychologist);
+      toast.success(
+        `Psychologist: ${psychologist.name} removed from favorites.`,
+      );
     } else {
       await addToFavorites(currentUser.uid, psychologist.name);
       setIsFavorite(true);
+      toast.success(`Psychologist: ${psychologist.name} added to favorites.`);
     }
 
     setIsFavorite(!isFavorite);
