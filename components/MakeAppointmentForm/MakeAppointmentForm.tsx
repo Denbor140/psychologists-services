@@ -95,7 +95,7 @@ export default function MakeAppointmentForm({
             {...register("name")}
           />
           {errors.name && (
-            <p style={{ color: "red", position: "absolute" }}>
+            <p style={{ color: "red" }}>
               {errors.name.message}
             </p>
           )}
@@ -109,7 +109,7 @@ export default function MakeAppointmentForm({
               {...register("phone")}
             />
             {errors.phone && (
-              <p style={{ color: "red", position: "absolute" }}>
+              <p style={{ color: "red", }}>
                 {errors.phone.message}
               </p>
             )}
@@ -129,7 +129,7 @@ export default function MakeAppointmentForm({
               )}
             />
             {errors.time && (
-              <p style={{ color: "red", position: "absolute" }}>
+              <p style={{ color: "red", }}>
                 {errors.time.message}
               </p>
             )}
@@ -143,7 +143,7 @@ export default function MakeAppointmentForm({
             {...register("email")}
           />
           {errors.email && (
-            <p style={{ color: "red", position: "absolute" }}>
+            <p style={{ color: "red", }}>
               {errors.email.message}
             </p>
           )}
@@ -156,7 +156,7 @@ export default function MakeAppointmentForm({
             {...register("comment")}
           />
           {errors.comment && (
-            <p style={{ color: "red", position: "absolute" }}>
+            <p style={{ color: "red", }}>
               {errors.comment.message}
             </p>
           )}

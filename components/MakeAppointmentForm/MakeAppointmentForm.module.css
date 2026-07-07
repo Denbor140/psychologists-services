@@ -1,7 +1,7 @@
 .form_container {
   width: 290px;
   height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 0 auto;
 }
 
@@ -13,8 +13,8 @@
 
 @media screen and (min-width: 1440px) {
   .form_container {
-    overflow: hidden;
-    height: auto;
+    overflow-x: hidden;
+    height: 735px;
   }
 }
 
