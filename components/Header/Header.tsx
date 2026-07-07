@@ -34,7 +34,7 @@ export default function Header() {
             <Menu width={20} height={20} />
           </button>
 
-          {open && <BurgerMenu />}
+          {open && <BurgerMenu onClose={() => isOpen(false)} />}
 
           <div className={css.auth_slot}>
             {loading ? (

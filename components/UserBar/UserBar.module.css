@@ -1,7 +1,16 @@
 .user_bar_container {
+  border-top: 1px solid rgba(25, 26, 21, 0.1);
   margin-left: auto;
   display: flex;
   gap: 28px;
+  padding: 24px;
+}
+
+@media screen and (min-width: 1440px) {
+  .user_bar_container {
+    border-top: none;
+    padding: 0;
+  }
 }
 
 .user_info_container {
