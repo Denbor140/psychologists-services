@@ -9,6 +9,12 @@
   pointer-events: auto;
 }
 
+@media screen and (min-width: 1440px) {
+  .backdrop {
+    display: none;
+  }
+}
+
 .burger_menu {
   position: fixed;
   top: 0;

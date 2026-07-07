@@ -58,7 +58,7 @@ export default function MakeAppointmentForm({
     closeModal();
   };
   return (
-    <>
+    <div className={css.form_container}>
       <button type="button" className={css.btn_close} onClick={onClose}>
         <X width={24} height={24} strokeWidth={2.5} />
       </button>
@@ -114,7 +114,6 @@ export default function MakeAppointmentForm({
               </p>
             )}
           </div>
-
           <div>
             <Controller
               name="time"
@@ -166,6 +165,6 @@ export default function MakeAppointmentForm({
           {isSubmitting ? "Sending..." : "Send"}
         </button>
       </form>
-    </>
+    </div>
   );
 }
