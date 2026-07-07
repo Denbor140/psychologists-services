@@ -55,10 +55,11 @@ export default function Hero() {
             <div className={css.hero_expienced_container}>
               <div className={css.experienced_check_container}>
                 <Check
-                  height={30}
-                  width={30}
+                  height={14}
+                  width={14}
                   strokeWidth={3}
                   stroke="#54be96"
+                  className={css.expienced_check_img}
                 />
               </div>
               <div>

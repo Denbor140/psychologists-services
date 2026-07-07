@@ -5,10 +5,10 @@ import { useEffect, type ReactNode } from "react";
 interface ModalProps {
   children: ReactNode;
   onClose: () => void;
-  maxWidth?: number;
+  width?: number;
 }
 
-export default function Modal({ children, onClose, maxWidth }: ModalProps) {
+export default function Modal({ children, onClose, width }: ModalProps) {
   const closeForBackDrop = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -38,7 +38,7 @@ export default function Modal({ children, onClose, maxWidth }: ModalProps) {
       aria-modal="true"
       onClick={closeForBackDrop}
     >
-      <div className={css.modal} style={maxWidth ? { maxWidth } : undefined}>
+      <div className={css.modal} style={width ? { width } : undefined}>
         {children}
       </div>
     </div>,

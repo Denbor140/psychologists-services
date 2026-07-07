@@ -13,7 +13,14 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   color: #fbfbfb;
+  font-size: 14px;
   transition: background-color 250ms ease-in-out;
+}
+
+@media screen and (min-width: 1440px) {
+  .load_more_btn {
+    font-size: inherit;
+  }
 }
 
 .load_more_btn:hover {

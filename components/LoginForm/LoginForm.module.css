@@ -5,15 +5,28 @@
 }
 .title {
   font-weight: 500;
-  font-size: 40px;
+  font-size: 32px;
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin-bottom: 20px;
 }
 
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 40px;
+  }
+}
+
 .subtitle {
   color: #191a1580;
+  font-size: 14px;
   margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .subtitle {
+    font-size: inherit;
+  }
 }
 
 .form_email_container,
@@ -47,6 +60,13 @@
   height: 52px;
   background-color: #54be96;
   transition: background-color 250ms ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .btn_close_img {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .login_btn:hover {

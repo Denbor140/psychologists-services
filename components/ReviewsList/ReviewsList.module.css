@@ -24,12 +24,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .reviewer_img_container {
+    font-size: inherit;
+  }
 }
 
 .reviewer_info {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .reviewer_info {
+    font-size: inherit;
+  }
 }
 
 .reviewer_name,
@@ -44,6 +58,13 @@
 
 .reviewer_comment {
   color: rgba(25, 26, 21, 0.5);
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .reviewer_comment {
+    font-size: inherit;
+  }
 }
 
 .reviews_btn {
@@ -54,7 +75,14 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   color: #fbfbfb;
+  font-size: 14px;
   transition: background-color 250ms ease-in-out;
+}
+
+@media screen and (min-width: 1440px) {
+  .reviews_btn {
+    font-size: inherit;
+  }
 }
 
 .reviews_btn:hover {

@@ -59,7 +59,12 @@ export default function RegisterForm({
         className={css.register_btn_close}
         onClick={onClose}
       >
-        <X width={32} height={32} strokeWidth={2.5} />
+        <X
+          width={24}
+          height={24}
+          strokeWidth={2.5}
+          className={css.btn_close_img}
+        />
       </button>
       <div>
         <h2 className={css.title}>Registration</h2>

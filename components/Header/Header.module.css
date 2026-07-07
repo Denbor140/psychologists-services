@@ -6,6 +6,7 @@
   padding: 24px 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -13,7 +14,12 @@
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  margin-right: 130px;
+}
+
+@media screen and (min-width: 1440px) {
+  .logo {
+    margin-right: 130px;
+  }
 }
 
 .logo > span:first-child {
@@ -29,13 +35,25 @@
 }
 
 .auth_slot {
-  margin-left: auto;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .auth_slot {
+    margin-left: auto;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .auth_placeholder {
   width: 306px;
   height: 48px;
+}
+
+@media screen and (min-width: 1440px) {
+  .burger_menu {
+    display: none;
+  }
 }

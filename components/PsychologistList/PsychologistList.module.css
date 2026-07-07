@@ -9,12 +9,20 @@
 }
 
 .list_item {
-  display: grid;
-  grid-template-columns: 120px 1fr;
+  display: flex;
+  flex-direction: column;
   padding: 24px;
   gap: 24px;
   border-radius: 24px;
   background-color: #fbfbfb;
+}
+
+@media screen and (min-width: 768px) {
+  .list_item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+  }
 }
 
 .item_img_container {
@@ -38,8 +46,17 @@
 
 .info_top_container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 24px;
   margin-bottom: 24px;
+}
+
+@media screen and (min-width: 1440px) {
+  .info_top_container {
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 0;
+  }
 }
 
 .info_top_left {
@@ -50,25 +67,50 @@
 
 .info_categorie {
   font-weight: 500;
+  font-size: 14px;
   line-height: 1.5;
   color: #8a8a89;
 }
 
+@media screen and (min-width: 1440px) {
+  .info_name {
+    font-size: inherit;
+  }
+}
+
 .info_name {
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
+}
+
+@media screen and (min-width: 1440px) {
+  .info_name {
+    font-size: 24px;
+  }
 }
 
 .info_top_right {
   display: flex;
   align-items: center;
-  height: 26px;
+}
+
+@media screen and (min-width: 1440px) {
+  .info_top_right {
+    height: 26px;
+  }
 }
 
 .info_rating {
   display: inline-flex;
   align-items: center;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .info_rating {
+    font-size: inherit;
+  }
 }
 
 .info_rating > svg {
@@ -87,7 +129,15 @@
 
 .info_price {
   margin-right: 28px;
+  font-size: 14px;
 }
+
+@media screen and (min-width: 1440px) {
+  .info_price {
+    font-size: inherit;
+  }
+}
+
 .info_price,
 .info_price > span,
 .info_rating > span {
@@ -110,23 +160,34 @@
 .info_medium_list_item {
   font-weight: 500;
   line-height: 1.5;
+  border-radius: 24px;
+  padding: 8px 16px;
+  background-color: #f3f3f3;
+  min-width: 193px;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .info_medium_list_item {
+    height: 40px;
+    font-size: inherit;
+  }
 }
 
 .info_medium_list_item > span {
   color: #8a8a89;
 }
 
-.info_medium_list_item {
-  border-radius: 24px;
-  padding: 8px 16px;
-  background-color: #f3f3f3;
-  min-width: 193px;
-  height: 40px;
-}
-
 .psychologist_about {
   color: #191a1580;
+  font-size: 14px;
   margin-bottom: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .psychologist_about {
+    font-size: inherit;
+  }
 }
 
 .psychologist_btn {
@@ -134,6 +195,13 @@
   line-height: 1.5;
   text-decoration: underline;
   text-decoration-skip-ink: none;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1440px) {
+  .psychologist_btn {
+    font-size: inherit;
+  }
 }
 
 .reviews_wrapper {
