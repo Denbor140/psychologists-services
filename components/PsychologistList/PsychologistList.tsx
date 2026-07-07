@@ -36,16 +36,17 @@ export default function PsychologistsList({
     <section className={css.psychologist_section_container}>
       <ul className={css.list_container}>
         {psychologists.map((psychologist) => {
-          const isReadMore = readMore.has(psychologist.name);
+          const isReadMore = readMore.has(psychologist.id);
 
           return (
-            <li key={psychologist.name} className={css.list_item}>
+            <li key={psychologist.id} className={css.list_item}>
               <div className={css.item_img_container}>
                 <Image
                   src={psychologist.avatar_url}
                   alt={psychologist.name}
                   width={96}
                   height={96}
+                  loading="lazy"
                   className={css.item_img}
                 />
                 <Circle
@@ -103,7 +104,7 @@ export default function PsychologistsList({
                 <button
                   type="button"
                   className={css.psychologist_btn}
-                  onClick={() => toggleExpand(psychologist.name)}
+                  onClick={() => toggleExpand(psychologist.id)}
                 >
                   {isReadMore ? "Hide" : "Read more"}
                 </button>

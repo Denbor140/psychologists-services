@@ -19,7 +19,7 @@ import { FilterValue } from "@/types/FilterValue";
 import { getPsychologistsFilters } from "./getPsychologistsFilters";
 
 const PAGE_SIZE = 3;
-export type Cursor = { value: string | number; key: string } | null;
+export type Cursor = { value: string; key: string } | null;
 
 interface getAllPsychologistResponse {
   items: Psychologist[];
@@ -42,41 +42,60 @@ export async function getAllPsychologists(
     } else if (rangeStart !== undefined) {
       constraints.push(startAt(rangeStart));
     }
+
     if (rangeEnd !== undefined) {
       constraints.push(endAt(rangeEnd));
     }
+
     constraints.push(limitToFirst(PAGE_SIZE + 1));
   } else {
     if (cursor) {
       constraints.push(endBefore(cursor.value, cursor.key));
     }
+
     constraints.push(limitToLast(PAGE_SIZE + 1));
   }
 
   const snapshot = await get(query(ref(rtdb, "psychologists"), ...constraints));
 
   if (!snapshot.exists()) {
-    return { items: [], lastCursor: null, hasMore: false };
+    return {
+      items: [],
+      lastCursor: null,
+      hasMore: false,
+    };
   }
 
-  let raw: (Psychologist & { id: string })[] = [];
+  const raw: (Psychologist & { id: string })[] = [];
+
   snapshot.forEach((child) => {
-    raw.push({ id: child.key!, ...child.val() });
+    raw.push({
+      id: child.key!,
+      ...child.val(),
+    });
   });
 
   if (direction === "desc") {
-    raw = raw.reverse();
+    raw.reverse();
   }
 
   const hasMore = raw.length > PAGE_SIZE;
   const items = hasMore ? raw.slice(0, PAGE_SIZE) : raw;
 
-  const boundaryItem = hasMore ? raw[PAGE_SIZE] : null;
-  const lastCursor: Cursor = boundaryItem
-    ? { value: boundaryItem[field], key: boundaryItem.id }
+  const lastItem = items[items.length - 1];
+
+  const lastCursor: Cursor = lastItem
+    ? {
+        value: lastItem[field] as string,
+        key: lastItem.id,
+      }
     : null;
 
-  return { items, lastCursor, hasMore };
+  return {
+    items,
+    lastCursor,
+    hasMore,
+  };
 }
 
 export async function addToFavorites(uid: string, psychologistName: string) {

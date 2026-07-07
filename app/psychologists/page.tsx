@@ -51,8 +51,8 @@ export default function PsychologistsPage() {
           <button
             type="button"
             className={css.load_more_btn}
-            onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
           >
             Load More
           </button>
