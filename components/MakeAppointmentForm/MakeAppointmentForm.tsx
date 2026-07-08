@@ -58,7 +58,7 @@ export default function MakeAppointmentForm({
     closeModal();
   };
   return (
-    <div className={css.form_container}>
+    <>
       <button type="button" className={css.btn_close} onClick={onClose}>
         <X width={24} height={24} strokeWidth={2.5} />
       </button>
@@ -95,7 +95,7 @@ export default function MakeAppointmentForm({
             {...register("name")}
           />
           {errors.name && (
-            <p style={{ color: "red" }}>
+            <p style={{ color: "red", position: "absolute" }}>
               {errors.name.message}
             </p>
           )}
@@ -109,7 +109,7 @@ export default function MakeAppointmentForm({
               {...register("phone")}
             />
             {errors.phone && (
-              <p style={{ color: "red", }}>
+              <p style={{ color: "red", position: "absolute" }}>
                 {errors.phone.message}
               </p>
             )}
@@ -129,7 +129,7 @@ export default function MakeAppointmentForm({
               )}
             />
             {errors.time && (
-              <p style={{ color: "red", }}>
+              <p style={{ color: "red", position: "absolute" }}>
                 {errors.time.message}
               </p>
             )}
@@ -143,7 +143,7 @@ export default function MakeAppointmentForm({
             {...register("email")}
           />
           {errors.email && (
-            <p style={{ color: "red", }}>
+            <p style={{ color: "red", position: "absolute" }}>
               {errors.email.message}
             </p>
           )}
@@ -156,7 +156,7 @@ export default function MakeAppointmentForm({
             {...register("comment")}
           />
           {errors.comment && (
-            <p style={{ color: "red", }}>
+            <p style={{ color: "red", position: "absolute" }}>
               {errors.comment.message}
             </p>
           )}
@@ -165,6 +165,6 @@ export default function MakeAppointmentForm({
           {isSubmitting ? "Sending..." : "Send"}
         </button>
       </form>
-    </div>
+    </>
   );
 }

@@ -20,16 +20,22 @@ export default function ChooseModal({
   initialMode,
   onClose,
 }: ChooseModalProps) {
-  const [mode, setMode] = useState<ModalMode>(initialMode);
+  const [mode] = useState<ModalMode>(initialMode);
 
   return (
-    <Modal onClose={onClose} width={mode === "appointment" ? 600 : undefined}>
-      {mode === "login" && <LoginForm onSuccess={onClose} onClose={onClose} />}
-      {mode === "register" && (
-        <RegisterForm onSuccess={onClose} onClose={onClose} />
-      )}
-      {mode === "appointment" && (
-        <MakeAppointmentForm psychologist={psychologist} onClose={onClose} />
+    <Modal onClose={onClose}>
+      {(close) => (
+        <>
+          {mode === "login" && <LoginForm onSuccess={close} onClose={close} />}
+
+          {mode === "register" && (
+            <RegisterForm onSuccess={close} onClose={close} />
+          )}
+
+          {mode === "appointment" && (
+            <MakeAppointmentForm psychologist={psychologist} onClose={close} />
+          )}
+        </>
       )}
     </Modal>
   );

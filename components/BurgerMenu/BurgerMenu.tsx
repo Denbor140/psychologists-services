@@ -11,7 +11,7 @@ import { X } from "lucide-react";
 
 export default function BurgerMenu({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
-  const { currentUser, loading } = useAuth();
+  const { currentUser } = useAuth();
   const { openModal } = useModal();
   const [open, isOpen] = useState(false);
 
@@ -36,7 +36,10 @@ export default function BurgerMenu({ onClose }: { onClose: () => void }) {
     isOpen(false);
   };
   return createPortal(
-    <div className={css.backdrop} onClick={closeForBackDrop}>
+    <div
+      className={`${css.backdrop} ${open ? css.backdrop_open : ""}`}
+      onClick={closeForBackDrop}
+    >
       <div
         className={`${css.burger_menu} ${open ? css.burger_menu_open : ""}`}
         onClick={(e) => e.stopPropagation()}
@@ -52,7 +55,7 @@ export default function BurgerMenu({ onClose }: { onClose: () => void }) {
             <span>.</span>
             <span>services</span>
           </Link>
-          <button type="button" onClick={onClose}>
+          <button type="button" onClick={() => isOpen(false)}>
             <X width={20} height={20} strokeWidth={2.5} />
           </button>
         </header>
@@ -61,7 +64,7 @@ export default function BurgerMenu({ onClose }: { onClose: () => void }) {
           <Link
             href={"/"}
             className={`${css.nav_link} ${pathname === "/" ? css.nav_link_active : ""}`}
-            onClick={onClose}
+            onClick={() => isOpen(false)}
           >
             Home
           </Link>
@@ -69,7 +72,7 @@ export default function BurgerMenu({ onClose }: { onClose: () => void }) {
           <Link
             href={"/psychologists"}
             className={`${css.nav_link} ${pathname === "/psychologists" ? css.nav_link_active : ""}`}
-            onClick={onClose}
+            onClick={() => isOpen(false)}
           >
             Psychologists
           </Link>
@@ -83,14 +86,8 @@ export default function BurgerMenu({ onClose }: { onClose: () => void }) {
           </Link>
         </nav>
 
-        <div className={css.auth_slot} onClick={onClose}>
-          {loading ? (
-            <div className={css.auth_placeholder} />
-          ) : currentUser ? (
-            <UserBar />
-          ) : (
-            <AuthButtons />
-          )}
+        <div onClick={() => isOpen(false)}>
+          {currentUser ? <UserBar /> : <AuthButtons />}
         </div>
       </div>
     </div>,

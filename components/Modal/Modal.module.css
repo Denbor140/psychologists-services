@@ -9,6 +9,19 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 0 16px;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.backdrop_open {
+  opacity: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .backdrop {
+    padding: 0;
+  }
 }
 
 .modal {
@@ -18,11 +31,18 @@
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
+  max-width: 600px;
+  max-height: 90vh;
+  width: 100%;
+  transition: all 250ms ease-in-out;
 }
 
 @media screen and (min-width: 768px) {
   .modal {
     padding: 64px;
-    width: 565px;
   }
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
 }
